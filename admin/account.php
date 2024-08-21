@@ -2,7 +2,7 @@
 /**
  * account administration
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 /**
@@ -53,7 +53,6 @@ if ($action == 'dosignin') {
     $uid = LoginAuth::checkUser($username, $password);
     switch ($uid) {
         case $uid > 0:
-            Register::isRegServer();
             $User_Model->updateUser(['ip' => getIp()], $uid);
             LoginAuth::setAuthCookie($username, $persist);
             if ($resp === 'json') {

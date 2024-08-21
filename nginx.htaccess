@@ -1,0 +1,4 @@
+location / {     index index.php index.html;     if (!-e $request_filename){         rewrite ^/(.*)$ /index.php last;     } }
+location /aaaa/ {
+            rewrite ^/aaaa/(.*)$ /content/templates/$1 break;
+        }

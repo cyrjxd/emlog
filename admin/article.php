@@ -3,7 +3,7 @@
  * The article management
  *
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 /**
@@ -272,10 +272,6 @@ if ($action === 'write') {
     $mediaSorts = $MediaSort_Model->getSorts();
     $customTemplates = $Template_Model->getCustomTemplates('log');
     $fields = [];
-
-    if (!Register::isRegLocal() && $sta_cache['lognum'] > 50) {
-        emDirect("auth.php?error_article=1");
-    }
 
     include View::getAdmView(User::haveEditPermission() ? 'header' : 'uc_header');
     require_once(View::getAdmView('article_write'));

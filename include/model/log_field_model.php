@@ -3,7 +3,7 @@
  * log field model
  *
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class Log_Field_Model {

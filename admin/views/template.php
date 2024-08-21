@@ -28,13 +28,6 @@
 <?php if (isset($_GET['error_i'])): ?>
     <div class="alert alert-danger">您的emlog pro尚未注册</div><?php endif ?>
 
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h4 mb-0 text-gray-800">模板主题</h1>
-    <div>
-        <a href="store.php" class="btn btn-sm btn-warning shadow-sm mt-4"><i class="icofont-shopping-cart"></i> 应用商店</a>
-        <a href="#" class="btn btn-sm btn-success shadow-sm mt-4" data-toggle="modal" data-target="#addModal"><i class="icofont-plus"></i> 安装模板</a>
-    </div>
-</div>
 <div class="row app-list">
     <?php foreach ($templates as $key => $value): ?>
         <div class="col-md-4">
@@ -53,16 +46,12 @@
                     <?php if ($value['version']): ?>
                         <div class="small">版本号：<?= $value['version'] ?></div>
                     <?php endif ?>
-                    <?php if ($value['author'] && strpos($value['author_url'], 'https://www.emlog.net') === 0): ?>
-                        <div class="small">开发者：<a href="<?= $value['author_url'] ?>" target="_blank"><?= $value['author'] ?></a></div>
-                    <?php elseif ($value['author']): ?>
+                    <?php if ($value['author']): ?>
                         <div class="small">开发者：<?= $value['author'] ?></div>
                     <?php endif ?>
                     <div class="small">
                         <?= $value['tpldes'] ?>
-                        <?php if (strpos($value['tplurl'], 'https://www.emlog.net') === 0): ?>
-                            <a href="<?= $value['tplurl'] ?>" target="_blank">更多信息&rarr;</a>
-                        <?php endif ?>
+                        <a href="<?= $value['tplurl'] ?>" target="_blank">更多信息&rarr;</a>
                     </div>
                     <div class="card-text d-flex justify-content-between mt-3">
                         <span>
@@ -81,74 +70,4 @@
     <?php endforeach ?>
 </div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">安装模板</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="./template.php?action=upload_zip" method="post" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div>
-                        <p>上传一个zip压缩格式的模板安装包</p>
-                        <p>
-                            <input name="token" id="token" value="<?= LoginAuth::genToken() ?>" type="hidden"/>
-                            <input name="tplzip" type="file"/>
-                        </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-sm btn-success">上传</button>
-                    <span id="alias_msg_hook"></span>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
-<script>
-    // check for upgrade
-    $(function () {
-        setTimeout(hideActived, 3600);
-        $("#menu_category_view").addClass('active');
-        $("#menu_view").addClass('show');
-        $("#menu_tpl").addClass('active');
-
-        var templateList = [];
-        $('.app-list .card').each(function () {
-            var $card = $(this);
-            var alias = $card.data('app-alias');
-            var version = $card.data('app-version');
-            templateList.push({
-                name: alias,
-                version: version
-            });
-        });
-        $.ajax({
-            url: './template.php?action=check_update',
-            type: 'POST',
-            data: {
-                templates: templateList
-            },
-            success: function (response) {
-                if (response.code === 0) {
-                    var pluginsToUpdate = response.data;
-                    $.each(pluginsToUpdate, function (index, item) {
-                        var $tr = $('.app-list .card[data-app-alias="' + item.name + '"]');
-                        var $updateBtn = $tr.find('.update-btn');
-                        $updateBtn.append($('<a>').addClass('btn btn-warning btn-sm').text('更新').attr("href", "./template.php?action=upgrade&alias=" + item.name));
-                    });
-                } else {
-                    console.log('更新接口返回错误');
-                }
-            },
-            error: function () {
-                console.log('请求更新接口失败');
-            }
-        });
-    });
-</script>

@@ -95,20 +95,11 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" id="menu_store">
-                <a class="nav-link" href="store.php"><i class="icofont-shopping-cart"></i><span>应用商店</span></a>
-            </li>
             <hr class="sidebar-divider d-none d-md-block">
             <?php doAction('adm_menu') ?>
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-            <?php if (!Register::isRegLocal()) : ?>
-                <div class="sidebar-card">
-                    <p class="text-center mb-2">您安装的emlog尚未注册，完成注册解锁全部功能和服务</p>
-                    <a class="btn btn-success btn-sm" href="auth.php">去注册</a>
-                </div>
-            <?php endif ?>
         <?php endif ?>
     </ul>
     <div id="content-wrapper" class="d-flex flex-column">

@@ -2,7 +2,7 @@
 /**
  * plugin user interface
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 /**

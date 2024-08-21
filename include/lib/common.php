@@ -2,7 +2,7 @@
 /**
  * Common function library
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 function emAutoload($class) {
@@ -777,7 +777,6 @@ function set_ctx_option() {
             'timeout' => 120,
             'method'  => 'GET',
             'header'  => "Referer: " . BLOG_URL . "\r\n"
-                . "Emkey: " . $emkey . "\r\n"
                 . "User-Agent: emlog " . Option::EMLOG_VERSION . "\r\n",
         ],
         "ssl"  => [

@@ -2,7 +2,7 @@
 /**
  * Captcha
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 if (!isset($_SESSION)) {

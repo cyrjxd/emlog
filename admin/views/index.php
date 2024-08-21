@@ -95,23 +95,7 @@
                                 <span class="small"><?= Option::get('timezone') ?></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <?php if (!Register::isRegLocal()) : ?>
-                                        <a href="https://www.emlog.net/register" target="_blank"><span class="badge badge-secondary">Emlog <?= Option::EMLOG_VERSION ?> 未注册</span></a>
-                                    <?php else: ?>
-                                        <a href="https://www.emlog.net" target="_blank"><span class="badge badge-success">Emlog <?= ucfirst(Option::EMLOG_VERSION) ?></span></a>
-                                        <?php if (Register::getRegType() === 2): ?>
-                                            <a href="https://www.emlog.net/register" target="_blank" class="badge badge-warning">铁杆SVIP</a>
-                                        <?php elseif (Register::getRegType() === 1): ?>
-                                            <a href="https://www.emlog.net/register" target="_blank" class="badge badge-success">友情VIP</a>
-                                        <?php else: ?>
-                                            <a href="https://www.emlog.net/register" target="_blank" class="badge badge-success">已注册</a>
-                                        <?php endif ?>
-                                    <?php endif; ?>
-                                </div>
-                                <div>
-                                    <a id="ckup" href="javascript:checkUpdate();" class="badge badge-success d-flex align-items-center"><span>更新</span></a>
-                                </div>
+                                <div>已注册</div>
                             </li>
                         </ul>
                     </div>
@@ -120,45 +104,6 @@
         <?php endif; ?>
     </div>
 <?php if (User::isAdmin()): ?>
-    <?php if (!Register::isRegLocal()) : ?>
-        <div class="row">
-            <div class="col-lg-6 mb-3">
-                <div class="card shadow">
-                    <div class="card-header bg-danger text-white">
-                        <h6 class="my-0">您安装的emlog尚未注册，完成注册可使用全部功能，包括如下：</h6>
-                    </div>
-                    <div class="card-body">
-                        <p>1. 解锁在线升级功能，一键升级到最新版本，获得来自官方的安全和功能更新</p>
-                        <p>2. 解锁应用商店，获得更多模板和插件，并支持应用在线一键更新</p>
-                        <p>3. 去除所有未注册提示及功能限制，加入专属Q群，获得官方技术指导问题解答</p>
-                        <p>4. 专属应用，20多款收费应用（限铁杆SVIP）</p>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="auth.php" class="btn btn-sm btn-primary shadow-lg">去注册</a>
-                        <a href="https://emlog.net/register" target="_blank" class="btn btn-sm btn-success shadow-lg">获取注册码-></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif ?>
-    <div class="modal fade" id="update-modal" tabindex="-1" role="dialog" aria-labelledby="update-modal-label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="update-modal-label">检查更新</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="update-modal-loading"></div>
-                    <div id="update-modal-msg" class="text-center"></div>
-                    <div id="update-modal-changes"></div>
-                    <div id="update-modal-btn" class="mt-2 text-right"></div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="shortcutModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
@@ -186,17 +131,6 @@
             </div>
         </div>
     </div>
-    <script>
-        setTimeout(hideActived, 3600);
-        const menuPanel = $("#menu_panel").addClass('active');
-
-        // auto check update
-        $.get("./upgrade.php?action=check_update", function (result) {
-            if (result.code === 200) {
-                $("#ckup").append('<span class="badge bg-danger ml-1">!</span>');
-            }
-        });
-    </script>
 <?php endif ?>
 <?php if (User::isAdmin()): ?>
     <div class="row">

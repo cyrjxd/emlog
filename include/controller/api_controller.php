@@ -3,7 +3,7 @@
  * Rest API controller
  *
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class Api_Controller {
@@ -90,9 +90,6 @@ class Api_Controller {
         }
 
         $sta_cache = $this->Cache->readCache('sta');
-        if (!Register::isRegLocal() && $sta_cache['lognum'] > 50) {
-            Output::error(html_entity_decode("&#x672A;&#x6CE8;&#x518C;&#x7684;&#x7248;&#x672C;", ENT_COMPAT, 'UTF-8'));
-        }
 
         if ($this->curUid) {
             $author_uid = $this->curUid;

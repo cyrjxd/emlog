@@ -2,7 +2,7 @@
 /**
  * upgrade
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 /**
@@ -11,28 +11,6 @@
  */
 
 require_once 'globals.php';
-
-if ($action === 'check_update') {
-    $emcurl = new EmCurl();
-    $emcurl->setPost([
-        'emkey'     => Option::get('emkey'),
-        'version'   => Option::EMLOG_VERSION,
-        'timestamp' => Option::EMLOG_VERSION_TIMESTAMP,
-    ]);
-
-    $emcurl->request('https://www.emlog.net/service/upgrade');
-    $retStatus = $emcurl->getHttpStatus();
-    $response = $emcurl->getRespone();
-    header('Content-Type: application/json; charset=UTF-8');
-    if ($retStatus !== 200) {
-        exit('{"result":"fail"}');
-    }
-    $r = json_decode($response);
-    if ($r->code === 1001) {
-        Register::clean();
-    }
-    exit($response);
-}
 
 if ($action === 'update' && User::isAdmin()) {
     $source = isset($_GET['source']) ? trim($_GET['source']) : '';

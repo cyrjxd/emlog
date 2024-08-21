@@ -3,7 +3,7 @@
  * article and page model
  *
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class Log_Model {

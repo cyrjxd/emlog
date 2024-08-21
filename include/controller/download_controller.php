@@ -3,7 +3,7 @@
  * Download Controller
  *
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class Download_Controller {

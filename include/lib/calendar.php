@@ -2,7 +2,7 @@
 /**
  * Calendar
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class Calendar {

@@ -2,7 +2,7 @@
 /**
  * View control
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class View {

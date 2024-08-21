@@ -3,7 +3,7 @@
  * Service: Field
  *
  * @package EMLOG
- * @link https://www.emlog.net
+ * 
  */
 
 class Field {

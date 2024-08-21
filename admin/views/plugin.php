@@ -31,7 +31,6 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h4 mb-0 text-gray-800">插件扩展</h1>
     <div>
-        <a href="store.php?action=plu" class="btn btn-sm btn-warning shadow-sm mt-4"><i class="icofont-shopping-cart"></i> 应用商店</a>
         <a href="#" class="btn btn-sm btn-success shadow-sm mt-4" data-toggle="modal" data-target="#addModal"><i class="icofont-plus"></i> 安装插件</a>
     </div>
 </div>
@@ -88,7 +87,7 @@
                                     <div class="flex-grow-1 ms-3">
                                         <div class="align-items-center mb-3">
                                             <p class="mb-0 m-2"><?= $val['Name'] ?></p>
-                                            <p class="mb-0 m-2 small"><?= $val['Description'] ?> <?php if (strpos($val['Url'], 'https://www.emlog.net') === 0): ?><a href="<?= $val['Url'] ?>" target="_blank">更多信息&raquo;</a><?php endif ?></p>
+                                            <p class="mb-0 m-2 small"><?= $val['Description'] ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -101,11 +100,7 @@
                             <td>
                                 <div class="mt-3">
                                     <?php if ($val['Author'] != ''): ?>
-                                        <?php if (strpos($val['AuthorUrl'], 'https://www.emlog.net') === 0): ?>
-                                            <a href="<?= $val['AuthorUrl'] ?>" target="_blank"><?= $val['Author'] ?></a>
-                                        <?php else: ?>
-                                            <?= $val['Author'] ?>
-                                        <?php endif ?>
+                                        <?= $val['Author'] ?>
                                     <?php endif ?>
                                 </div>
                             </td>
@@ -159,47 +154,6 @@
 </div>
 
 <script>
-    // check for upgrade
-    $(function () {
-        setTimeout(hideActived, 3600);
-        $("#menu_category_ext").addClass('active');
-
-        var pluginList = [];
-        $('table tbody tr').each(function () {
-            var $tr = $(this);
-            var pluginAlias = $tr.data('plugin-alias');
-            var currentVersion = $tr.data('plugin-version');
-            pluginList.push({
-                name: pluginAlias,
-                version: currentVersion
-            });
-        });
-        $.ajax({
-            url: './plugin.php?action=check_update',
-            type: 'POST',
-            data: {
-                plugins: pluginList
-            },
-            success: function (response) {
-                if (response.code === 0) {
-                    var pluginsToUpdate = response.data;
-                    $.each(pluginsToUpdate, function (index, item) {
-                        var $tr = $('table tbody tr[data-plugin-alias="' + item.name + '"]');
-                        var $updateBtn = $tr.find('.update-btn');
-                        $updateBtn.append($('<a>').addClass('btn btn-success btn-sm').text('更新').attr("href", "./plugin.php?action=upgrade&alias=" + item.name));
-                    });
-                } else {
-                    $('#upMsg').html('插件更新检查无法正常进行,错误码:' + response.code).addClass('alert alert-warning');
-                }
-            },
-            error: function (xhr) {
-                var responseText = xhr.responseText;
-                var responseObject = JSON.parse(responseText);
-                var msgValue = responseObject.msg;
-                $('#upMsg').html('插件更新检查异常： ' + msgValue).addClass('alert alert-warning');
-            }
-        });
-    });
 
     function toggleSwitch(plugin, id, token) {
         var switchElement = document.getElementById(id);
